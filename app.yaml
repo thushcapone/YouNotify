@@ -1,0 +1,18 @@
+application: gcdc2013-younotify
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /assets
+  static_dir: templates/assets
+
+- url: /.*
+  script: younotify.application
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

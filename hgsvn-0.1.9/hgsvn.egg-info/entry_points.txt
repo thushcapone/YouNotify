@@ -1,0 +1,5 @@
+[console_scripts]
+hgpullsvn = hgsvn.run.hgpullsvn:main
+hgpushsvn = hgsvn.run.hgpushsvn:main
+hgimportsvn = hgsvn.run.hgimportsvn:main
+

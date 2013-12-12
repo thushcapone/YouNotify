@@ -1,0 +1,5 @@
+* Add a command to import SVN tags pertaining to the current project
+  from the ``tags`` path in the SVN repo.
+
+* Add a config file in a dedicated .hgsvn directory.
+
