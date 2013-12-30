@@ -1,4 +1,4 @@
 cron:
 - description: daily summary job
   url: /update
-  schedule: every 5 hours
+  schedule: every 3 hours
