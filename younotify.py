@@ -1,19 +1,19 @@
 import jinja2
 import os
-import urllib
 import webapp2
 import httplib2
 import pytz
+from datetime import datetime
+from datetime import timedelta
 
-from google.appengine.api import urlfetch
+
 from google.appengine.api import users
 from google.appengine.ext import db
 from apiclient.discovery import build
 from oauth2client import appengine
 from google.appengine.api import memcache
 from oauth2client.appengine import StorageByKeyName, CredentialsModel
-from datetime import datetime
-from datetime import timedelta
+
 from models import Utilisateur
 from models import UtilisateurEtChaine
 from models import Chaine
@@ -99,10 +99,12 @@ class ComingSoon(webapp2.RequestHandler):
 
 class Index(webapp2.RequestHandler):
 
+    @decorator.oauth_aware
     def get(self):
-        user = users.get_current_user()
-                
-        template_values = {'user': user}
+        template_values = {
+            'user':users.get_current_user(),
+            'has_credentials':  decorator.has_credentials()
+        }
         template = JINJA_ENVIRONMENT.get_template('templates/index.html')
         self.response.write(template.render(template_values))
 
@@ -113,12 +115,13 @@ class YoutubeHandler(webapp2.RequestHandler):
     def get(self):
         youtube = SERVICEYOUTUBE
         http = decorator.http()
-        user_chaines = db.GqlQuery("SELECT * FROM UtilisateurEtChaine WHERE userID = :idU", idU=users.get_current_user().user_id())
+        user_id = users.get_current_user().user_id()
+        user_chaines = db.GqlQuery("SELECT * FROM UtilisateurEtChaine WHERE userID = :idU", idU=user_id)
         tab_abonnement = []
         for i in user_chaines:
             tab_abonnement.append(i.channelID)
         db.delete(user_chaines)
-        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=users.get_current_user().user_id())
+        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=user_id)
         credentials = ''
         if u.get() is None:
             self.redirect("http://gcdc2013-younotify.appspot.com/register")
@@ -156,12 +159,13 @@ class GetUsersChannelHandler(webapp2.RequestHandler):
     def get(self):
         youtube = SERVICEYOUTUBE
         http = decorator.http()
-        user_chaines = db.GqlQuery("SELECT * FROM UserOwnChannel WHERE userID = :idU", idU=users.get_current_user().user_id())
+        user_id = users.get_current_user().user_id()
+        user_chaines = db.GqlQuery("SELECT * FROM UserOwnChannel WHERE userID = :idU", idU=user_id)
         tab_abonnement = []
         for i in user_chaines:
             tab_abonnement.append(i.channelID)
         db.delete(user_chaines)
-        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=users.get_current_user().user_id())
+        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=user_id)
         credentials = ''
         if u.get() is None:
             self.redirect("http://gcdc2013-younotify.appspot.com/register")
@@ -170,7 +174,7 @@ class GetUsersChannelHandler(webapp2.RequestHandler):
                 credentials = i.credential
             http = httplib2.Http()
             http = credentials.authorize(http)
-            list_subscriptions_response = youtube.subscriptions().list(
+            list_subscriptions_response = youtube.channels().list(
                 part="id,snippet",
                 mine=True,
                 maxResults=25
@@ -329,10 +333,12 @@ class UpdateVideoHandler(webapp2.RequestHandler):
             for ligne in u:
                 if ligne.channelID in channels_with_new_videos:
                     message_calendar += channels_with_new_videos[ligne.channelID] + ',\n'
-            credentials = StorageByKeyName(CredentialsModel, b.userID, 'credentials').get()
+            #credentials = StorageByKeyName(CredentialsModel, b.userID, 'credentials').get()
+            credentials = b.credential
             cred.append(credentials)
             http = httplib2.Http()
             http = credentials.authorize(http)
+            #http = decorator.http()
             now = datetime.now(pytz.timezone('UTC'))
             i = 5
             start = now + timedelta(minutes=i)
@@ -425,6 +431,7 @@ application = webapp2.WSGIApplication([
     ('/index.html', ComingSoon),
     ('/bbt', Index),
     ('/youtube', YoutubeHandler),
+    ('/my_channels', GetUsersChannelHandler),
     ('/register', Register),
     ('/register2', YoutubeHandler),
     ('/channel2', Register2Handler),
