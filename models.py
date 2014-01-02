@@ -19,6 +19,11 @@ class UtilisateurEtChaine(db.Model):
     channelID = db.StringProperty(required=True)
 
 
-class UserOwnChannel(db.Model):
-    userID = db.StringProperty(required=True)
+class OwnChannel(db.Model):
     channelID = db.StringProperty(required=True)
+    userID = db.StringProperty(required=True)
+    nbreLikes = db.IntegerProperty()
+    nbreSubscribers = db.IntegerProperty()
+    nbreHiddenSubscribers = db.IntegerProperty()
+    nbreFavorites = db.IntegerProperty()
+    nbreViews = db.IntegerProperty()

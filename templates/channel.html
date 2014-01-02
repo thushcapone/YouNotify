@@ -48,6 +48,7 @@
                 </div>
                 <div class="register span6">
                     <h1>{{cred}}</h1>
+                    {% if subscriptions %}
                     <form action="/thanks" method="post">
                          <h2>Choose Channels that you want to<span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
                          {% for subscription in subscriptions %}
@@ -62,6 +63,38 @@
                          {% endfor %}
 			             <button type="submit">SUBMIT</button>
                     </form>
+                    {% endif %}
+
+                    {% if my_channels %}
+                    <form action="/save_own_channel" method="post">
+                         <h2>Choose your Channels that you want to<span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
+                        {% if message != '' %}
+                            {% for channel in my_channels %}
+                                <label class="checkbox">
+                                   <img src="{{ channel.snippet.thumbnails.default.url }}" name="image[]" width="88px" height:"88px" style="padding-right: 15px">
+                                    {% if channel.deja_abonne %}
+                                        <input type="checkbox" name="chaines" value="{{ channel.id }}" checked>{{ channel.snippet.title }}
+                                    {% else %}
+                                        <input type="checkbox" name="chaines" value="{{ channel.id }}">{{ channel.snippet.title }}
+                                    {% endif %}
+                                 </label>
+                                <span>Views count: {{ channel.statistics.viewCount}}</span><br/>
+                                <input type="hidden" name="viewCount" value="{{ channel.statistics.viewCount}}"/>
+                                <span>Likes count: {{ channel.contentDetails.likes }}</span><br/>
+                                <input type="hidden" name="likesCount" value="{{ channel.contentDetails.likes }}"/>
+                                <span>Favorites count: {{ channel.contentDetails.favorites }}</span><br/>
+                                <input type="hidden" name="FavCount" value="{{ channel.contentDetails.favorites }}"/>
+                                <span>Subscribers count: {{ channel.statistics.subscriberCount }}</span><br/>
+                                <input type="hidden" name="SubsCount" value="{{ channel.statistics.subscriberCount }}"/>
+                                <span>Hidden Subscribers count: {{ channel.statistics.hiddenSubscriberCount }}</span><br/>
+                                <input type="hidden" name="hiddenSubsCount" value="{{ channel.statistics.hiddenSubscriberCount }}"/>
+                            {% endfor %}
+                        {% else %}
+                            <span>{{message}}</span>
+                        {% endif%}
+			             <button type="submit">SUBMIT</button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

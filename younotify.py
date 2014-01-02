@@ -17,6 +17,8 @@ from oauth2client.appengine import StorageByKeyName, CredentialsModel
 from models import Utilisateur
 from models import UtilisateurEtChaine
 from models import Chaine
+from models import OwnChannel
+
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -48,11 +50,24 @@ href="https://code.google.com/apis/console">APIs Console</a>.
 
 http = httplib2.Http(memcache)
 
-decorator = appengine.oauth2decorator_from_clientsecrets(
-    CLIENT_SECRETS,
-    scope=['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/calendar'],
-    message=MISSING_CLIENT_SECRETS_MESSAGE
+#decorator = appengine.oauth2decorator_from_clientsecrets(
+#    CLIENT_SECRETS,
+#    scope=['https://www.googleapis.com/auth/youtube.readonly',
+#           'https://www.googleapis.com/auth/calendar'],
+#    message=MISSING_CLIENT_SECRETS_MESSAGE
+#)
+
+decorator = appengine.OAuth2Decorator(
+    client_id="873080943535-r530olahgmoggead5efgbekk7ecu1oro.apps.googleusercontent.com",
+    client_secret="IurBjo_aR-1NzW7NHZw-1xms",
+    scope=['https://www.googleapis.com/auth/youtube.readonly',
+           'https://www.googleapis.com/auth/calendar'],
+    message=MISSING_CLIENT_SECRETS_MESSAGE,
+    access_type="offline",
+    approval_prompt="force"
 )
+#decorator.flow.params.update({'access_type': 'offline'})
+
 
 
 CALENDAR_API_VERSION = "v3"
@@ -69,7 +84,7 @@ class Register(webapp2.RequestHandler):
 
     @decorator.oauth_required
     def get(self):
-        u = db.GqlQuery('SELECT * FROM Utilisateur where userID = :userID', userID = users.get_current_user().user_id())
+        u = db.GqlQuery('SELECT * FROM Utilisateur where userID = :userID', userID=users.get_current_user().user_id())
         if u.get() is None:
             userID = users.get_current_user().user_id()
             userEmail = users.get_current_user().email()
@@ -77,12 +92,16 @@ class Register(webapp2.RequestHandler):
             calendar = {
                 'summary': 'youNotify',            
             }
-            http = decorator.http()
-            request = calendar_serv.calendars().insert(body=calendar).execute(http=http)
-            calendarId = request['id']
-            cred = decorator.get_credentials()
-            utilisateur = Utilisateur(calendarID=calendarId, userID=userID, userEmail=userEmail, credential=cred)
-            utilisateur.put()
+            #decorator.flow.params.update({'approval_prompt': 'force'})
+            if decorator.has_credentials():
+                http = decorator.http()
+                request = calendar_serv.calendars().insert(body=calendar).execute(http=http)
+                calendarId = request['id']
+                cred = decorator.get_credentials()
+                utilisateur = Utilisateur(calendarID=calendarId, userID=userID, userEmail=userEmail, credential=cred)
+                utilisateur.put()
+            else:
+                self.redirect(decorator.authorize_url())
 
         template_values = {}
         template = JINJA_ENVIRONMENT.get_template('templates/register.html')
@@ -115,21 +134,16 @@ class YoutubeHandler(webapp2.RequestHandler):
     def get(self):
         youtube = SERVICEYOUTUBE
         http = decorator.http()
-        user_id = users.get_current_user().user_id()
-        user_chaines = db.GqlQuery("SELECT * FROM UtilisateurEtChaine WHERE userID = :idU", idU=user_id)
+        user_chaines = db.GqlQuery("SELECT * FROM UtilisateurEtChaine WHERE userID = :idU", idU=users.get_current_user().user_id())
         tab_abonnement = []
         for i in user_chaines:
             tab_abonnement.append(i.channelID)
         db.delete(user_chaines)
-        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=user_id)
+        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=users.get_current_user().user_id())
         credentials = ''
         if u.get() is None:
             self.redirect("http://gcdc2013-younotify.appspot.com/register")
         else:
-            for i in u:
-                credentials = i.credential
-            http = httplib2.Http()
-            http = credentials.authorize(http)
             list_subscriptions_response = youtube.subscriptions().list(
                 part="id,snippet",
                 mine=True,
@@ -160,37 +174,34 @@ class GetUsersChannelHandler(webapp2.RequestHandler):
         youtube = SERVICEYOUTUBE
         http = decorator.http()
         user_id = users.get_current_user().user_id()
-        user_chaines = db.GqlQuery("SELECT * FROM UserOwnChannel WHERE userID = :idU", idU=user_id)
+        user_chaines = db.GqlQuery("SELECT * FROM OwnChannel WHERE userID = :idU", idU=user_id)
         tab_abonnement = []
         for i in user_chaines:
             tab_abonnement.append(i.channelID)
         db.delete(user_chaines)
         u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=user_id)
-        credentials = ''
         if u.get() is None:
             self.redirect("http://gcdc2013-younotify.appspot.com/register")
         else:
-            for i in u:
-                credentials = i.credential
-            http = httplib2.Http()
-            http = credentials.authorize(http)
             list_subscriptions_response = youtube.channels().list(
-                part="id,snippet",
+                part="id,snippet,contentDetails",
                 mine=True,
                 maxResults=25
             ).execute(http=http)
 
-            if not list_subscriptions_response["items"]:
-                print "No subscriptions was found."
-
-            subscriptions = []
-            for result in list_subscriptions_response.get("items", []):
-                if result['snippet']['resourceId']['channelId'] in tab_abonnement:
-                    result['deja_abonne'] = True
-                subscriptions.append(result)
-
+            my_channels = []
+            if len(list_subscriptions_response) != 0:
+                message = ''
+                for result in list_subscriptions_response.get("items", []):
+                    if result['id'] in tab_abonnement:
+                        result['deja_abonne'] = True
+                    my_channels.append(result)
+            else:
+                message = "No subscriptions was found."
+                my_channels = []
             template_values = {
-            'subscriptions': subscriptions
+                'my_channels': my_channels,
+                'message': message
             }
 
             template = JINJA_ENVIRONMENT.get_template('templates/channel.html')
@@ -261,7 +272,6 @@ class ThanksHandler(webapp2.RequestHandler):
 
     @decorator.oauth_required
     def post(self):
-
         idChaines = self.request.get('chaines', allow_multiple=True)
         youtube = SERVICEYOUTUBE
         for idChaine in idChaines:
@@ -283,10 +293,32 @@ class ThanksHandler(webapp2.RequestHandler):
         for idChaine in idChaines:
             chaine2 = UtilisateurEtChaine(userID=userID, channelID=idChaine)
             chaine2.put()
-
         template_values = {
         'nom': users.get_current_user().nickname(),
         'chaines':idChaines
+        }
+        template = JINJA_ENVIRONMENT.get_template('templates/thanks.html')
+        self.response.write(template.render(template_values))
+
+
+class SaveOwnedChannelHandler(webapp2.RequestHandler):
+
+    @decorator.oauth_required
+    def post(self):
+        chaines = self.request.get('chaines', allow_multiple=True)
+        likes = self.request.get('likesCount', allow_multiple=True)
+        favorites = self.request.get('FavCount', allow_multiple=True)
+        subs = self.request.get('SubsCount', allow_multiple=True)
+        view_count = self.request.get('viewCount', allow_multiple=True)
+        hidden_subs = self.request.get('hiddenSubsCount', allow_multiple=True)
+        user_id = users.get_current_user().user_id()
+        for i in range(0, len(chaines)):
+            chaine = OwnChannel(channelID=chaines[i], nbreLike=int(likes[i]), nbreViews=int(view_count[i]),
+                                nbreFavorites=int(favorites[i]), nbreSubscribers=int(subs[i]),
+                                nbreHiddenSubscribers=int(hidden_subs[i]), userID=user_id)
+            chaine.put()
+        template_values = {
+            'nom': users.get_current_user().nickname(),
         }
         template = JINJA_ENVIRONMENT.get_template('templates/thanks.html')
         self.response.write(template.render(template_values))
@@ -297,6 +329,8 @@ class UpdateVideoHandler(webapp2.RequestHandler):
     def get(self):
         nbre_video = 0
         youtube = SERVICEYOUTUBE
+        calendar_serv = SERVICECALENDAR
+        http = httplib2.Http()
         requete = db.GqlQuery("SELECT * FROM Chaine")
         liste = []
         cred = []
@@ -321,9 +355,6 @@ class UpdateVideoHandler(webapp2.RequestHandler):
                 chaine.put()
                 liste.append({'nbre_video': nbre_video, "nbVideos": new_videos})
                 channels_with_new_videos[channelID] = nom_channel
-        calendar_serv = SERVICECALENDAR
-        #requete = db.GqlQuery("SELECT Utilisateur.userID, channelID , credentials  FROM UtilisateurEtChaine,
-        # Utilisateur WHERE channelID = :chaineID and Utilisateur.userID=UtilisateurEtChaine.userID",
         # chaineID=channelID)
         message_calendar = ''
         for b in db.GqlQuery("SELECT * FROM Utilisateur"):
@@ -336,7 +367,6 @@ class UpdateVideoHandler(webapp2.RequestHandler):
             #credentials = StorageByKeyName(CredentialsModel, b.userID, 'credentials').get()
             credentials = b.credential
             cred.append(credentials)
-            http = httplib2.Http()
             http = credentials.authorize(http)
             #http = decorator.http()
             now = datetime.now(pytz.timezone('UTC'))
@@ -352,9 +382,6 @@ class UpdateVideoHandler(webapp2.RequestHandler):
                 },
                 'end': {
                     'dateTime': str(end.isoformat())
-                },
-                'reminders': {
-                    'overrides': ['sms', 'email', 'popup']
                 }
             }
             cred.append({"calendar": calendar})
@@ -374,6 +401,91 @@ class UpdateVideoHandler(webapp2.RequestHandler):
             self.response.write(template.render(template_values))
 
 
+class UpdateChannelOwnerHandler(webapp2.RequestHandler):
+
+    def get(self):
+        youtube = SERVICEYOUTUBE
+        calendar_serv = SERVICECALENDAR
+        requete = db.GqlQuery("SELECT * FROM OwnChannel")
+        liste = []
+        cred = []
+        idCal = []
+        for chaine in requete:
+            credentials = StorageByKeyName(CredentialsModel, chaine.userID, 'credentials').get()
+            http = httplib2.Http()
+            http = credentials.authorize(http)
+            nbre_like = chaine.nbreLike
+            nbreSubs = chaine.nbreSubscribers
+            nbreHiddenSubs = chaine.nbreHiddenSubscribers
+            nbreFav = chaine.nbreFavorites
+            nbreViews = chaine.nbreViews
+            new_like = 0
+            new_subs = 0
+            new_hidden_subs = 0
+            new_favs = 0
+            new_views = 0
+            channels_response = youtube.channels().list(
+                part="id,snippet,statistics,contentDetails",
+                mine=True,
+                id=chaine.channelID
+                ).execute(http=http)
+            for stat in channels_response["items"]:
+                new_views = stat['statistics']['viewCount']
+                new_subs = stat['statistics']['subscriberCount']
+                new_hidden_subs = stat['statistics']['hiddenSubscriberCount']
+                new_favs = stat['contentDetails']['relatedPlaylists']['favorites']
+                new_like = stat['contentDetails']['relatedPlaylists']['likes']
+            if int(new_like) != nbre_like or int(new_favs) != nbreFav or int(new_subs) != nbreSubs or \
+                    int(new_views) != nbreViews or int(new_hidden_subs) != nbreHiddenSubs:
+                chaine.nbreViews = int(new_views)
+                chaine.nbreLike = int(new_like)
+                chaine.nbreFavorites = int(new_favs)
+                chaine.nbreHiddenSubscribers = int(new_hidden_subs)
+                chaine.nbreSubscribers = int(new_subs)
+                chaine.put()
+
+                message_calendar = 'New video(s) is(are) posted on these channel(s) '
+                cred.append(credentials)
+                now = datetime.now(pytz.timezone('UTC'))
+                i = 5
+                start = now + timedelta(minutes=i)
+                i += 10
+                end = now + timedelta(minutes=i)
+                calendar = {
+                    'summary': message_calendar,
+                    'location': 'Youtube',
+                    'start': {
+                        'dateTime': str(start.isoformat())
+                    },
+                    'end': {
+                        'dateTime': str(end.isoformat())
+                    },
+                    'reminders': {
+                        'overrides': ['sms', 'email', 'popup']
+                    }
+                }
+                cred.append({"calendar": calendar})
+                req = db.GqlQuery("SELECT * FROM Utilisateur where userID=:id_u", id_u=chaine.userID)
+                calendar_id = 0
+                for i in req:
+                    calendar_id = i.calendarID
+                request = calendar_serv.events().insert(
+                    calendarId=calendar_id,
+                    body=calendar,
+                    sendNotifications=True
+                    ).execute(http=http)
+                idCal.append(request['id'])
+            else:
+                pass
+        template_values = {
+            'liste': liste,
+            'cred': cred,
+            'events': idCal
+        }
+        template = JINJA_ENVIRONMENT.get_template('templates/update.html')
+        self.response.write(template.render(template_values))
+
+
 class RevokeHandler(webapp2.RequestHandler):
 
     @decorator.oauth_aware
@@ -389,11 +501,7 @@ class RevokeHandler(webapp2.RequestHandler):
             http = cred.authorize(http)
             cred._revoke(http)
         db.delete(u)
-        """
-        c = db.GqlQuery('SELECT * FROM CredentialsModel where credentials = :credentials', credentials=cred)
-        db.delete(c)
-        """
-        """self.redirect("https://accounts.google.com/o/oauth2/revoke?token="+)"""
+        #self.redirect("https://accounts.google.com/o/oauth2/revoke?token="+)"""
         self.redirect("https://accounts.google.com/IssuedAuthSubTokens")
 
 
@@ -436,7 +544,9 @@ application = webapp2.WSGIApplication([
     ('/register2', YoutubeHandler),
     ('/channel2', Register2Handler),
     ('/thanks', ThanksHandler),
+    ('/save_own_channel', SaveOwnedChannelHandler),
     ('/update', UpdateVideoHandler),
+    ('/update_my_channels', UpdateChannelOwnerHandler),
     ('/register3',Register3Handler),
     ('/tutorial',TutorialHandler),
     ('/tutorial2',Tutorial2Handler),
