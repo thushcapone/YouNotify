@@ -330,7 +330,6 @@ class UpdateVideoHandler(webapp2.RequestHandler):
         nbre_video = 0
         youtube = SERVICEYOUTUBE
         calendar_serv = SERVICECALENDAR
-        http = httplib2.Http()
         requete = db.GqlQuery("SELECT * FROM Chaine")
         liste = []
         cred = []
@@ -367,6 +366,7 @@ class UpdateVideoHandler(webapp2.RequestHandler):
             #credentials = StorageByKeyName(CredentialsModel, b.userID, 'credentials').get()
             credentials = b.credential
             cred.append(credentials)
+            http = httplib2.Http()
             http = credentials.authorize(http)
             #http = decorator.http()
             now = datetime.now(pytz.timezone('UTC'))
