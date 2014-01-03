@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f3e79e7-95d2-4b0c-a639-7dcd09ccb34e" name="Default" comment="Add offline mode and channel owners part">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/assets/img/YouNotify.PNG" afterPath="$PROJECT_DIR$/templates/assets/img/YouNotify.PNG" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/assets/img/iphone2.png" afterPath="$PROJECT_DIR$/templates/assets/img/iphone2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/channel.html" afterPath="$PROJECT_DIR$/templates/channel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/assets/css/style.css" afterPath="$PROJECT_DIR$/templates/assets/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/younotify.py" afterPath="$PROJECT_DIR$/younotify.py" />
     </list>
     <ignored path="YouNotify.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,66 +38,24 @@
       <file leaf-file-name="younotify.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/younotify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="29" selection-start="2662" selection-end="2662" vertical-scroll-proportion="0.29508197" vertical-offset="1404" max-vertical-offset="6336">
+            <state line="361" column="8" selection-start="13340" selection-end="13340" vertical-scroll-proportion="0.40358743" vertical-offset="2394" max-vertical-offset="4140">
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#4474#5934#0" expanded="false" />
-                <element signature="e#7581#7764#0" expanded="false" />
-                <element signature="e#7820#8003#0" expanded="false" />
-                <element signature="e#8054#8234#0" expanded="false" />
-                <element signature="e#8290#8648#0" expanded="false" />
-                <element signature="e#8704#9352#0" expanded="false" />
-                <element signature="e#9405#10772#0" expanded="false" />
-                <element signature="e#15077#18617#0" expanded="false" />
-                <element signature="e#18670#19336#0" expanded="false" />
+                <element signature="e#2423#4220#0" expanded="false" />
+                <element signature="e#4270#4460#0" expanded="false" />
+                <element signature="e#4505#4826#0" expanded="false" />
+                <element signature="e#4880#6340#0" expanded="false" />
+                <element signature="e#6402#7908#0" expanded="false" />
+                <element signature="e#7963#8146#0" expanded="false" />
+                <element signature="e#8202#8385#0" expanded="false" />
+                <element signature="e#8436#8616#0" expanded="false" />
+                <element signature="e#8672#9030#0" expanded="false" />
+                <element signature="e#9086#9734#0" expanded="false" />
+                <element signature="e#9787#11154#0" expanded="false" />
+                <element signature="e#11217#12083#0" expanded="false" />
+                <element signature="e#15631#19171#0" expanded="false" />
+                <element signature="e#19224#20436#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="thanks.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/thanks.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="61" selection-start="2145" selection-end="2145" vertical-scroll-proportion="-2.3333333" vertical-offset="837" max-vertical-offset="1782">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="appengine.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/oauth2client/appengine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="705" column="16" selection-start="23188" selection-end="23188" vertical-scroll-proportion="0.0" vertical-offset="12550" max-vertical-offset="17442">
-              <folding>
-                <element signature="e#745#758#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/update.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="44" selection-start="1056" selection-end="1056" vertical-scroll-proportion="3.3333333" vertical-offset="648" max-vertical-offset="1404">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.yaml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="30" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="channel.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/channel.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="25" selection-start="5594" selection-end="5594" vertical-scroll-proportion="-8.0" vertical-offset="1440" max-vertical-offset="2268">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -98,16 +63,16 @@
       <file leaf-file-name="client_secrets.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client_secrets.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="63" selection-start="15" selection-end="70" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="378">
+            <state line="5" column="51" selection-start="162" selection-end="162" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="378">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cron.yaml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cron.yaml">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="25" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
+            <state line="58" column="24" selection-start="2755" selection-end="2755" vertical-scroll-proportion="-6.259259" vertical-offset="875" max-vertical-offset="2016">
               <folding />
             </state>
           </provider>
@@ -116,7 +81,52 @@
       <file leaf-file-name="client.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oauth2client/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="12" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="24660">
+            <state line="517" column="6" selection-start="14611" selection-end="14611" vertical-scroll-proportion="0.0" vertical-offset="8862" max-vertical-offset="24372">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="channel.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/channel.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="82" column="71" selection-start="4684" selection-end="4696" vertical-scroll-proportion="-7.3333335" vertical-offset="1278" max-vertical-offset="2124">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/assets/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="18" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0" vertical-offset="970" max-vertical-offset="4356">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="thanks.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/thanks.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="61" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.0" vertical-offset="837" max-vertical-offset="1782">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appengine.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oauth2client/appengine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="253" column="6" selection-start="7694" selection-end="7694" vertical-scroll-proportion="0.0" vertical-offset="5892" max-vertical-offset="16938">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.yaml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="30" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="432">
               <folding />
             </state>
           </provider>
@@ -125,7 +135,7 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="25" selection-start="773" selection-end="794" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="612">
+            <state line="7" column="49" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
               <folding />
             </state>
           </provider>
@@ -150,13 +160,14 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/oauth2client/client.py" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/oauth2client/appengine.py" />
-        <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/client_secrets.json" />
         <option value="$PROJECT_DIR$/templates/thanks.html" />
-        <option value="$PROJECT_DIR$/templates/channel.html" />
         <option value="$PROJECT_DIR$/cron.yaml" />
+        <option value="$PROJECT_DIR$/templates/assets/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/channel.html" />
+        <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/younotify.py" />
       </list>
     </option>
@@ -191,6 +202,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -209,20 +221,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YouNotify" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YouNotify" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -280,6 +305,22 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="Python.AppEngineServer" factoryName="App Engine server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="YouNotify" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="browserUrl" value="" />
+      <option name="additionalOptions" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -302,22 +343,6 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.AppEngineServer" factoryName="App Engine server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="YouNotify" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="browserUrl" value="" />
-      <option name="additionalOptions" value="" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -333,9 +358,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -359,6 +381,9 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -459,29 +484,37 @@
       <created>1388632340002</created>
       <updated>1388632340002</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add offline mode and channel owners part">
+      <created>1388632462949</created>
+      <updated>1388632462950</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Je suis fatigué!">
+      <created>1388654517721</created>
+      <updated>1388654517721</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16060606" sideWeight="0.6704" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16742425" sideWeight="0.7984" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -497,37 +530,16 @@
     <MESSAGE value="First" />
     <MESSAGE value="Second commit" />
     <MESSAGE value="Add offline mode and channel owners part" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add offline mode and channel owners part" />
+    <MESSAGE value="Je suis fatigué!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Je suis fatigué!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apiclient/http.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="3" selection-start="760" selection-end="760" vertical-scroll-proportion="0.3146853" vertical-offset="162" max-vertical-offset="28566" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/younotify_bdk.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6264" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="36" selection-start="416" selection-end="416" vertical-scroll-proportion="0.6666667" vertical-offset="0" max-vertical-offset="2268" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oauth2client/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24372">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.yaml">
@@ -537,6 +549,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/update.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="44" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1404">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/thanks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="61" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.0" vertical-offset="837" max-vertical-offset="1782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oauth2client/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="21" selection-end="21" vertical-scroll-proportion="0.098092645" vertical-offset="0" max-vertical-offset="367" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="25" selection-start="79" selection-end="79" vertical-scroll-proportion="0.09440559" vertical-offset="0" max-vertical-offset="572" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="30" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
@@ -544,78 +580,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/update.html">
+    <entry file="file://$PROJECT_DIR$/templates/assets/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="44" selection-start="1056" selection-end="1056" vertical-scroll-proportion="3.3333333" vertical-offset="648" max-vertical-offset="1404">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="25" selection-start="773" selection-end="794" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="612">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/thanks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="61" selection-start="2145" selection-end="2145" vertical-scroll-proportion="-2.3333333" vertical-offset="837" max-vertical-offset="1782">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client_secrets.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="63" selection-start="15" selection-end="70" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="378">
+        <state line="66" column="18" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0" vertical-offset="970" max-vertical-offset="4356">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/channel.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="25" selection-start="5594" selection-end="5594" vertical-scroll-proportion="-8.0" vertical-offset="1440" max-vertical-offset="2268">
+        <state line="82" column="71" selection-start="4684" selection-end="4696" vertical-scroll-proportion="-7.3333335" vertical-offset="1278" max-vertical-offset="2124">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/oauth2client/__init__.py">
+    <entry file="file://$PROJECT_DIR$/oauth2client/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="21" selection-end="21" vertical-scroll-proportion="0.098092645" vertical-offset="0" max-vertical-offset="367">
+        <state line="517" column="6" selection-start="14611" selection-end="14611" vertical-scroll-proportion="0.0" vertical-offset="8862" max-vertical-offset="24372">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/google_appengine/helloworld/oauth2client/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="716" column="24" selection-start="20977" selection-end="20977" vertical-scroll-proportion="0.0" vertical-offset="12354" max-vertical-offset="24372">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oauth2client/appengine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="705" column="16" selection-start="23188" selection-end="23188" vertical-scroll-proportion="0.0" vertical-offset="12550" max-vertical-offset="17442">
-          <folding>
-            <element signature="e#745#758#0" expanded="true" />
-          </folding>
+        <state line="253" column="6" selection-start="7694" selection-end="7694" vertical-scroll-proportion="0.0" vertical-offset="5892" max-vertical-offset="16938">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cron.yaml">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="25" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="162">
+        <state line="58" column="24" selection-start="2755" selection-end="2755" vertical-scroll-proportion="-6.259259" vertical-offset="875" max-vertical-offset="2016">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="49" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client_secrets.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="51" selection-start="162" selection-end="162" vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="378">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/younotify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="29" selection-start="2662" selection-end="2662" vertical-scroll-proportion="0.29508197" vertical-offset="1404" max-vertical-offset="6336">
+        <state line="361" column="8" selection-start="13340" selection-end="13340" vertical-scroll-proportion="0.40358743" vertical-offset="2394" max-vertical-offset="4140">
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#4474#5934#0" expanded="false" />
-            <element signature="e#7581#7764#0" expanded="false" />
-            <element signature="e#7820#8003#0" expanded="false" />
-            <element signature="e#8054#8234#0" expanded="false" />
-            <element signature="e#8290#8648#0" expanded="false" />
-            <element signature="e#8704#9352#0" expanded="false" />
-            <element signature="e#9405#10772#0" expanded="false" />
-            <element signature="e#15077#18617#0" expanded="false" />
-            <element signature="e#18670#19336#0" expanded="false" />
+            <element signature="e#2423#4220#0" expanded="false" />
+            <element signature="e#4270#4460#0" expanded="false" />
+            <element signature="e#4505#4826#0" expanded="false" />
+            <element signature="e#4880#6340#0" expanded="false" />
+            <element signature="e#6402#7908#0" expanded="false" />
+            <element signature="e#7963#8146#0" expanded="false" />
+            <element signature="e#8202#8385#0" expanded="false" />
+            <element signature="e#8436#8616#0" expanded="false" />
+            <element signature="e#8672#9030#0" expanded="false" />
+            <element signature="e#9086#9734#0" expanded="false" />
+            <element signature="e#9787#11154#0" expanded="false" />
+            <element signature="e#11217#12083#0" expanded="false" />
+            <element signature="e#15631#19171#0" expanded="false" />
+            <element signature="e#19224#20436#0" expanded="false" />
           </folding>
         </state>
       </provider>

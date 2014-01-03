@@ -13,6 +13,7 @@ from apiclient.discovery import build
 from oauth2client import appengine
 from google.appengine.api import memcache
 from oauth2client.appengine import StorageByKeyName, CredentialsModel
+from google.appengine.api import urlfetch
 
 from models import Utilisateur
 from models import UtilisateurEtChaine
@@ -50,24 +51,16 @@ href="https://code.google.com/apis/console">APIs Console</a>.
 
 http = httplib2.Http(memcache)
 
-#decorator = appengine.oauth2decorator_from_clientsecrets(
-#    CLIENT_SECRETS,
-#    scope=['https://www.googleapis.com/auth/youtube.readonly',
-#           'https://www.googleapis.com/auth/calendar'],
-#    message=MISSING_CLIENT_SECRETS_MESSAGE
-#)
-
 decorator = appengine.OAuth2Decorator(
     client_id="873080943535-r530olahgmoggead5efgbekk7ecu1oro.apps.googleusercontent.com",
     client_secret="IurBjo_aR-1NzW7NHZw-1xms",
-    scope=['https://www.googleapis.com/auth/youtube.readonly',
+    scope=['https://www.googleapis.com/auth/youtube',
+           "https://www.googleapis.com/auth/youtubepartner",
            'https://www.googleapis.com/auth/calendar'],
     message=MISSING_CLIENT_SECRETS_MESSAGE,
     access_type="offline",
     approval_prompt="force"
 )
-#decorator.flow.params.update({'access_type': 'offline'})
-
 
 
 CALENDAR_API_VERSION = "v3"
@@ -89,16 +82,30 @@ class Register(webapp2.RequestHandler):
             userID = users.get_current_user().user_id()
             userEmail = users.get_current_user().email()
             calendar_serv = SERVICECALENDAR
+            youtube = SERVICEYOUTUBE
             calendar = {
                 'summary': 'youNotify',            
             }
-            #decorator.flow.params.update({'approval_prompt': 'force'})
             if decorator.has_credentials():
                 http = decorator.http()
                 request = calendar_serv.calendars().insert(body=calendar).execute(http=http)
+                playlists_insert_response = youtube.playlists().insert(
+                    part="snippet,status",
+                    body=dict(
+                        snippet=dict(
+                            title="YouNotify's Playlist",
+                            description="A private playlist created for YouNotify"
+                        ),
+                        status=dict(
+                            privacyStatus="private"
+                        )
+                    )
+                ).execute(http=http)
+                playlist_id = playlists_insert_response['id']
                 calendarId = request['id']
                 cred = decorator.get_credentials()
-                utilisateur = Utilisateur(calendarID=calendarId, userID=userID, userEmail=userEmail, credential=cred)
+                utilisateur = Utilisateur(calendarID=calendarId, userID=userID, userEmail=userEmail, credential=cred,
+                                          playlistID=playlist_id)
                 utilisateur.put()
             else:
                 self.redirect(decorator.authorize_url())
@@ -121,7 +128,7 @@ class Index(webapp2.RequestHandler):
     @decorator.oauth_aware
     def get(self):
         template_values = {
-            'user':users.get_current_user(),
+            'user': users.get_current_user(),
             'has_credentials':  decorator.has_credentials()
         }
         template = JINJA_ENVIRONMENT.get_template('templates/index.html')
@@ -183,22 +190,21 @@ class GetUsersChannelHandler(webapp2.RequestHandler):
         if u.get() is None:
             self.redirect("http://gcdc2013-younotify.appspot.com/register")
         else:
+            message = ''
+            my_channels = []
             list_subscriptions_response = youtube.channels().list(
-                part="id,snippet,contentDetails",
-                mine=True,
+                part="id,snippet,contentDetails,statistics",
+                mine="true",
                 maxResults=25
             ).execute(http=http)
 
-            my_channels = []
             if len(list_subscriptions_response) != 0:
-                message = ''
                 for result in list_subscriptions_response.get("items", []):
                     if result['id'] in tab_abonnement:
                         result['deja_abonne'] = True
                     my_channels.append(result)
             else:
                 message = "No subscriptions was found."
-                my_channels = []
             template_values = {
                 'my_channels': my_channels,
                 'message': message
@@ -306,16 +312,13 @@ class SaveOwnedChannelHandler(webapp2.RequestHandler):
     @decorator.oauth_required
     def post(self):
         chaines = self.request.get('chaines', allow_multiple=True)
-        likes = self.request.get('likesCount', allow_multiple=True)
-        favorites = self.request.get('FavCount', allow_multiple=True)
+        comments = self.request.get('commentCount', allow_multiple=True)
         subs = self.request.get('SubsCount', allow_multiple=True)
         view_count = self.request.get('viewCount', allow_multiple=True)
-        hidden_subs = self.request.get('hiddenSubsCount', allow_multiple=True)
         user_id = users.get_current_user().user_id()
         for i in range(0, len(chaines)):
-            chaine = OwnChannel(channelID=chaines[i], nbreLike=int(likes[i]), nbreViews=int(view_count[i]),
-                                nbreFavorites=int(favorites[i]), nbreSubscribers=int(subs[i]),
-                                nbreHiddenSubscribers=int(hidden_subs[i]), userID=user_id)
+            chaine = OwnChannel(channelID=chaines[i], nbreComments=int(comments[i]), nbreViews=int(view_count[i]),
+                                nbreSubscribers=int(subs[i]), userID=user_id)
             chaine.put()
         template_values = {
             'nom': users.get_current_user().nickname(),
@@ -356,6 +359,9 @@ class UpdateVideoHandler(webapp2.RequestHandler):
                 channels_with_new_videos[channelID] = nom_channel
         # chaineID=channelID)
         message_calendar = ''
+
+        # TODO: recuperer les videos les plus recentes pour les chaines avec du changement et les inserer dans la playlist
+        #
         for b in db.GqlQuery("SELECT * FROM Utilisateur"):
             u = db.GqlQuery("SELECT * FROM UtilisateurEtChaine WHERE userID = :userID",
                             userID=b.userID)
@@ -363,12 +369,19 @@ class UpdateVideoHandler(webapp2.RequestHandler):
             for ligne in u:
                 if ligne.channelID in channels_with_new_videos:
                     message_calendar += channels_with_new_videos[ligne.channelID] + ',\n'
-            #credentials = StorageByKeyName(CredentialsModel, b.userID, 'credentials').get()
             credentials = b.credential
             cred.append(credentials)
             http = httplib2.Http()
             http = credentials.authorize(http)
-            #http = decorator.http()
+            playlists_insert = youtube.playlists().insert(
+                    part="snippet,status",
+                    body=dict(
+                        snippet=dict(
+                            playlistId="YouNotify's Playlist",
+                            resourceId="A private playlist created for YouNotify"
+                        )
+                    )
+                ).execute(http=http)
             now = datetime.now(pytz.timezone('UTC'))
             i = 5
             start = now + timedelta(minutes=i)
@@ -426,7 +439,7 @@ class UpdateChannelOwnerHandler(webapp2.RequestHandler):
             new_views = 0
             channels_response = youtube.channels().list(
                 part="id,snippet,statistics,contentDetails",
-                mine=True,
+                mine=true,
                 id=chaine.channelID
                 ).execute(http=http)
             for stat in channels_response["items"]:
@@ -490,48 +503,28 @@ class RevokeHandler(webapp2.RequestHandler):
 
     @decorator.oauth_aware
     def get(self):
-        http = httplib2.Http()
+        http = decorator.http()
+        service = SERVICECALENDAR
         userID = users.get_current_user().user_id()
-        uc = db.GqlQuery('SELECT * FROM UtilisateurEtChaine where userID = :userID ', userID=userID)
-        db.delete(uc)
+        token = ''
+        calendar_id = ''
         u = db.GqlQuery('SELECT * FROM Utilisateur where userID = :userID', userID=userID)
-        cred = ""
         for ligne in u:
-            cred = ligne.credential
-            http = cred.authorize(http)
-            cred._revoke(http)
-        db.delete(u)
-        #self.redirect("https://accounts.google.com/o/oauth2/revoke?token="+)"""
-        self.redirect("https://accounts.google.com/IssuedAuthSubTokens")
-
-
-
-#class RevokeHandler(webapp2.RequestHandler):
-#
-#    #def __init__(self):
-#    #    self.user = users.get_current_user()
-#
-#    def get(self):
-#        u = db.GqlQuery("SELECT * FROM Utilisateur WHERE userID = :idU", idU=users.get_current_user().user_id())
-#        credentials = ''
-#        token = ''
-#        if u.get() is None:
-#            self.redirect("http://gcdc2013-younotify.appspot.com/register")
-#            return 0
-#        else:
-#            for i in u:
-#                token = i.credential['access_token']
-#
-#        result = urlfetch.fetch(url="https://www.google.com/accounts/AuthSubRevokeToken",
-#                                method="GET",
-#                                headers={'Authorization': token},
-#                                deadline=5)
-#        if result.status_code == 200:
-#            self.response.out.write("Its ok!")
-#            #self.redirect("/settings")
-#        else:
-#            self.response.out.write("There was a problem. Please try again later.")
-
+            token = ligne.credential.access_token
+            calendar_id = ligne.calendarID
+        result = urlfetch.fetch(url="https://accounts.google.com/o/oauth2/revoke?token="+token)
+        if result.status_code == 200:
+            uc = db.GqlQuery('SELECT * FROM UtilisateurEtChaine where userID = :userID ', userID=userID)
+            a = db.GqlQuery('SELECT * FROM CredentialsModel where id=:id_user', id_user=userID)
+            service.calendars().delete(calendar_id).execute(http=http)
+            db.delete(a)
+            db.delete(uc)
+            db.delete(u)
+            self.response.out.write(result.status_code)
+            #self.redirect("http://gcdc2013-younotify.appspot.com")
+        else:
+            self.response.out.write("There was a problem. Please try again later. "+str(result.status_code))
+            #self.redirect("http://gcdc2013-younotify.appspot.com/bbt")
 
 
 application = webapp2.WSGIApplication([

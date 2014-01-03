@@ -63,9 +63,15 @@ a:hover { text-decoration: none; }
 
 .iphone {
     text-align: right;
+    margin-left: 0%;
+    margin-top: -3%;
+}
+.register{
+    margin-left: 2%;
+    margin-right: 3%;
 }
 
-.iphone img { margin-right: 40px; }
+.iphone img { margin-right: 20%; }
 
 /* ----- Registration Form ----- */
 
@@ -131,7 +137,7 @@ a:hover { text-decoration: none; }
 .register form button {
     cursor: pointer;
     width: 60%;
-    height: 42px;
+    height: 52px;
     margin-top: 25px;
     padding: 0;
     background: #eb4141;
@@ -214,6 +220,17 @@ a:hover { text-decoration: none; }
 
     .register form button { width: 97%; }
 
+}
+
+#follow{
+	width:20%;
+    padding-right: 10%;
+	margin-right:-2%;
+
+}
+
+.span5{
+	margin-left:-8%;
 }
 
 
