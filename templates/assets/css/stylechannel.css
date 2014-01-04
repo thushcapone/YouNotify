@@ -1,34 +1,248 @@
-label{
-	
-	text-align:left;
-	padding:6px;
+/*
+ *
+ * Template Name: Fullscreen Responsive Register Template
+ * Template URI: http://azmind.com
+ * Author: Anli Zaimi
+ * Author URI: http://azmind.com
+ *
+ */
+
+
+body {
+    background: #f8f8f8;
+    text-align: left;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    color: #555;
+    font-size: 16px;
+    font-weight: 400;
 }
-.register form input {
-    width: 10%;
-    height: 25px;
+
+strong { font-weight: 700; }
+.red { color: #eb4141; }
+a:hover { text-decoration: none; }
+
+.header {
+    margin: 0 auto;
+    padding-bottom: 5px;
+    background: #f8f8f8 url(../img/pattern.jpg) left top repeat;
+    border-top: 3px solid #eb4141;
+    -moz-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+}
+
+.logo h1 {
+    padding-left: 50px;
+    font-family: 'Oleo Script', cursive;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.logo h1 a { color: #555; }
+
+.links {
+    text-align: right;
+}
+
+.links a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 15px 0 0 20px;
+}
+
+.links a.what { background: url(../img/what.png) center center no-repeat; }
+.links a.home { background: url(../img/accueil.png) center center no-repeat; }
+.links a.contact { background: url(../img/blog.png) center center no-repeat; margin-right: 50px; }
+
+.register-container {
+    margin-top: 50px;
+}
+
+/* ----- iPhone ----- */
+
+.iphone {
+    text-align: right;
+}
+
+.iphone img { margin-right: 40px; }
+
+
+/* ----- Media queries ----- */
+
+@media (max-width: 1200px) {
+
+    .register form h2 { background: url(../img/pencil.png) 20px 6px no-repeat; }
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    .register form h2 { background: none; }
+
+}
+
+@media (max-width: 767px) {
+
+    body { padding-left: 0; padding-right: 0; }
+
+    .logo, .links { text-align: center; }
+
+    .links { padding-bottom: 5px; }
+
+    .logo h1 { padding-left: 0; }
+
+    .links a.what { margin-left: 0; }
+
+    .links a.home { margin-left: 0; }
+
+    .links a.contact { margin-right: 0; }
+
+    .register-container { padding-left: 20px; padding-right: 20px; }
+
+    .register form h2 { background: none; }
+
+    .iphone img { display: none; }
+
+}
+
+@media (max-width: 480px) {
+
+    .register form button { width: 97%; }
+
+}
+
+#follow{
+	width:20%;
+	float:left;
+	margin-right:-7%;
+
+}
+
+.span5{
+	margin-left:-8%;
+}
+
+
+/* ----- Registration Form pour les channels et CI----- */
+
+
+div [class*="row main"] form h2 {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    /*background: url(../img/pencil.png) 70px 6px no-repeat;*/
+    border-bottom: 2px dotted #bbb;
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+}
+
+div [class*="row main"] form input {
+    width: 50%;
+    height: 35px;
     background: #fcfcfc;
     border: 1px solid #ddd;
-    /*-moz-border-radius: 2px;
+    -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset;
     -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset*/
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1) inset
     font-family: 'PT Sans', Helvetica, Arial, sans-serif;
     color: #888;
     font-size: 25px;
 }
 
-.register form input:focus {
+div [class*="row main"] form input:focus {
     border: 1px solid #ccc;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
-.register form label {
+div [class*="row main"] form label {
     margin: 7px 0 10px 5px;
     font-size: 16px;
     
 }
 
+div [class*="row main"] form label span {
+    font-style: italic;
+}
+
+div [class*="row main"] form input:-moz-placeholder { color: #aaa; }
+div [class*="row main"] form input:-ms-input-placeholder { color: #aaa; }
+div [class*="row main"] form input::-webkit-input-placeholder { color: #aaa; }
+
+div [class*="row main"] form button {
+    cursor: pointer;
+    width: 60%;
+    height: 52px;
+    margin-top: 25px;
+    padding: 0;
+    background: #eb4141;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 0;
+    -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+div [class*="row main"] form button:hover {
+    -moz-box-shadow: 0 -15px 30px 0 rgba(255,255,255,.05) inset;
+    -webkit-box-shadow: 0 -15px 30px 0 rgba(255,255,255,.05) inset;
+    box-shadow: 0 -15px 30px 0 rgba(255,255,255,.05) inset;
+}
+
+div [class*="row main"] form button:active {
+    -moz-box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+    box-shadow:
+        0 -15px 30px 0 rgba(255,255,255,.05) inset,       
+        0 5px 8px 0 rgba(0,0,0,.1) inset;
+}
+
+/* Fin Formulaire channel */
+
+
+div .right{
+    padding: 20px 50px 40px;
+    background: url("../img/pattern.jpg") repeat scroll left top rgb(248, 248, 248);
+    border-radius: 8px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    text-align: center;
+	width: 280px;
+	margin-bottom:10px;
+	float: left;
+}
+
+div .left{
+    padding: 20px 50px 40px;
+    background: url("../img/pattern.jpg") repeat scroll left top rgb(248, 248, 248);
+    border-radius: 8px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    text-align: center;
+	width: 280px;
+	margin-right: 20px;
+	margin-bottom:10px;
+	float: left;
+}
+
+#ci{
+	width: 100%;
+}

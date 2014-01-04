@@ -8,6 +8,7 @@ class Utilisateur(db.Model):
     playlistID = db.StringProperty(required=True)
     userEmail = db.StringProperty(required=True)
     credential = CredentialsProperty()
+    date_register = db.DateTimeProperty(auto_now=True)
 
 
 class Chaine(db.Model):
@@ -26,3 +27,13 @@ class OwnChannel(db.Model):
     nbreSubscribers = db.IntegerProperty()
     nbreComments = db.IntegerProperty()
     nbreViews = db.IntegerProperty()
+
+
+class Interets(db.Model):
+    interetID = db.StringProperty(required=True)
+    interet = db.StringProperty(required=True)
+
+
+class UtilisateurEtInteret(db.Model):
+    userID = db.StringProperty(required=True)
+    interetID = db.StringProperty(required=True)

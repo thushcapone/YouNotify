@@ -3,9 +3,10 @@
 <html lang="en">
 
     <head>
+
         <meta charset="utf-8">
         <title>YouNotify</title>
-	    <link rel="shortcut icon" type="image/x-icon" href="assets/img/accueil.png" />
+	    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -33,7 +34,7 @@
                     </div>
                     <div class="links span8">
                         <a class="home" href="/" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
-			            <a class="what" href="whatis.html" rel="tooltip" data-placement="bottom" data-original-title="What is YouNotify?"></a>
+			            <a class="what" href="/whatis" rel="tooltip" data-placement="bottom" data-original-title="What is YouNotify?"></a>
                         <a class="contact" href="mailto:thushcapone@gmail.com" rel="tooltip" data-placement="bottom" data-original-title="Contact Us"></a>
                     </div>
                 </div>
@@ -42,37 +43,39 @@
 
         <div class="register-container container">
             <div class="row">
-                <div class="span12">
-                    <div class="iphone span4">
-                        <img src="assets/img/iphone2.png" alt="">
-                    </div>
-                    <div class="register span4">
-                        <form action="/register" method="get">
-                            <h4>Do you want to receive a sms notification when a new video is uploaded in a Youtube Channel?</h4>
-                            <a href="https://plus.google.com/102873635075199110939" rel="publisher">Google+</a>
-                            <br/>
-                            <br/>
-                            <h2>REGISTER NOW TO<span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span></h2>
-                             <button type="submit" href="/register"><h4>Register</h4></button>
-                        </form>
+                <div class="iphone span5">
+                    <img src="assets/img/iphone2.png" alt="">
+                </div>
+                <div class="register span6">
+                    {% if has_credentials == False %}
+                    <form action="/register" method="get">
+            			<h4>Do you want to receive a sms notification when a new video is uploaded in a Youtube Channel?</h4>
+                        <a href="https://plus.google.com/102873635075199110939" rel="publisher">Google+</a>
+            			<br/>
+            			<br/>
+                        <h2>REGISTER NOW TO <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span></h2>
+			             <button type="submit" href="/register">REGISTER</button>
+                    </form>
 
-                        {% if has_credentials == True %}
-                         <h4>Do you want to change your settings or revoke your registration in YouNotify?</h4>
-                        <form action="/youtube" method="get">
-                             <button type="submit">CHANGE SETTINGS</button>
-                        </form>
+        			<br/>
+        			<br/>
+                    {% else %}
+			         <h4>Hello {{ user}} Do you want to change your settings or revoke your registration in YouNotify?</h4>
+                    <form action="/youtube" method="get">
+			             <button type="submit">Change your selections</button>
+                    </form>
 
-                        <form action="/revoke" method="get">
-
-                             <button type="submit">REVOKE</button>
-                        </form>
-                        {% endif %}
-                    </div>
-                    <div id="follow" class="span4" align="center">
-                            <!-- Place this tag where you want the widget to render. -->
-                            <div class="g-page" data-href="//plus.google.com/102873635075199110939" data-rel="publisher"></div>
-                            <!-- Place this tag after the last widget tag. -->
-                            <div class="fb-like" data-href="https://facebook.com/younotify" data-width="200px" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                    <form action="/revoke" method="get">
+			             <button type="submit">REVOKE</button>
+                    </form>
+                    {% endif %}                
+                </div>
+                <div id="follow">
+                    <div class="span4" align="center">
+                        <!-- Place this tag where you want the widget to render. -->
+                        <div class="g-page" data-href="//plus.google.com/102873635075199110939" data-rel="publisher"></div>
+                        <!-- Place this tag after the last widget tag. -->                    
+                        <div class="fb-like" data-href="https://facebook.com/younotify" data-width="200px" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                     </div>
                 </div>
             </div>
@@ -99,8 +102,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         </script>
-
     </body>
-
+<a href="https://plus.google.com/+Gcdc2013-younotifyAppspot" rel="publisher">Google+</a>
 </html>
 

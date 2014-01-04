@@ -6,6 +6,7 @@
 
         <meta charset="utf-8">
         <title>YouNotify</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -14,8 +15,7 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700'>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/stylechannel.css">
+	   <link rel="stylesheet" href="assets/css/stylechannel.css">
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -30,11 +30,11 @@
             <div class="container">
                 <div class="row">
                     <div class="logo span4">
-                        <h1><a href="index.html"><img src="assets/img/YouNotify.PNG" alt="YouNotify"/> <span class="red"></span></a></h1>
+                        <h1><a href="/"><img src="assets/img/YouNotify.PNG" alt="YouNotify"/> <span class="red"></span></a></h1>
                     </div>
                     <div class="links span8">
-			            <a class="home" href="index.html" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
-                        <a class="what" href="whatis.html" rel="tooltip" data-placement="bottom" data-original-title="What is YouNotify?"></a>
+                        <a class="home" href="/" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
+			            <a class="what" href="/whatis" rel="tooltip" data-placement="bottom" data-original-title="What is YouNotify?"></a>
                         <a class="contact" href="mailto:thushcapone@gmail.com" rel="tooltip" data-placement="bottom" data-original-title="Contact Us"></a>
                     </div>
                 </div>
@@ -42,51 +42,68 @@
         </div>
 
         <div class="register-container container">
-            <div class="row">
-                <div class="iphone span5">
+            <div class="row main">
+                <div class="iphone span5 channel">
                     <img src="assets/img/iphone2.png" alt="">
                 </div>
-                <div class="register span6">
-                    <h1>{{cred}}</h1>
-                    {% if subscriptions %}
-                    <form action="/thanks" method="post">
-                         <h2>Choose Channels that you want to<span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
-                         {% for subscription in subscriptions %}
-                			 <label class="checkbox">
-                                <img src="{{ subscription.snippet.thumbnails.default.url }}" name="image[]" width="88px" height:"88px" style="padding-right: 15px">
-                  				{% if subscription.deja_abonne %}
-                      				<input type="checkbox" name="chaines" value="{{ subscription.snippet.resourceId.channelId }}" checked>{{ subscription.snippet.title }}
-                                {% else %}
-                                    <input type="checkbox" name="chaines" value="{{ subscription.snippet.resourceId.channelId }}">{{ subscription.snippet.title }}
-                  				{% endif %}
-                			 </label>
-                         {% endfor %}
-			             <button type="submit">SUBMIT</button>
-                    </form>
-                    {% endif %}
+				<form action="/thanks" method="post">
+					<div class="left">
+						
 
-                    {% if my_channels %}
-                    <form action="/save_own_channel" method="post">
-                         <h2>Choose your Channels that you want to<span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
-                            {% for channel in my_channels %}
-                                <label class="checkbox">
-                                   <img src="{{ channel.snippet.thumbnails.default.url }}" name="image[]" width="88px" height:"88px" style="padding-right: 15px">
-                                    {% if channel.deja_abonne %}
-                                        <input type="checkbox" name="chaines" value="{{ channel.id }}" checked>{{ channel.snippet.title }}
-                                    {% else %}
-                                        <input type="checkbox" name="chaines" value="{{ channel.id }}">{{ channel.snippet.title }}
-                                    {% endif %}
-                                 </label>
-                                <span>Views count: {{ channel.statistics.viewCount}}</span><br/>
-                                <input type="hidden" name="viewCount" value="{{ channel.statistics.viewCount}}"/>
-                                <span>Comments count: {{ channel.statistics.commentCount }}</span><br/>
-                                <input type="hidden" name="commentCount" value="{{ channel.statistics.commentCount }}"/>
-                                <span>Subscribers count: {{ channel.statistics.subscriberCount }}</span><br/>
-                                <input type="hidden" name="SubsCount" value="{{ channel.statistics.subscriberCount }}"/>
-                            {% endfor %}
-			             <button type="submit">SUBMIT</button>
-                    </form>
-                    {% endif %}
+							<h2>Choose Channels that you want to <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
+							{% for subscription in subscriptions %}
+								<label class="checkbox">
+									<img src="{{ subscription.snippet.thumbnails.default.url }}" name="image[]" width="88px" height:"88px" style="padding-right: 15px">
+									{% if subscription.deja_abonne %}
+										<input type="checkbox" name="chaines" value="{{ subscription.snippet.resourceId.channelId }}" checked>{{ subscription.snippet.title }}
+									{% else %}
+										<input type="checkbox" name="chaines" value="{{ subscription.snippet.resourceId.channelId }}">{{ subscription.snippet.title }}
+									{% endif %}
+								</label>
+							{% endfor %}
+						
+					</div>
+					<div class="right">
+
+						<h2>With <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> Be weekly informed by the trending video about the topic of your choice(s).</h2>
+						<div class="form-group">
+							<label for="ci1" class="col-sm-2 control-label">Topic 1</label>
+							<div class="col-sm-10">
+							<input type="text" name ="topic1" class="form-control" id="ci" placeholder="e.g. Sports">
+							</div>
+							</div>
+							<div class="form-group">
+							<label for="ci2" class="col-sm-2 control-label">Topic 2</label>
+							<div class="col-sm-10">
+							<input type="text" name ="topic2" class="form-control" id="ci" placeholder="e.g. Beyonce">
+							</div>
+							</div>
+							<div class="form-group">
+							<label for="ci3" class="col-sm-2 control-label">Topic 3</label>
+							<div class="col-sm-10">
+							<input type="text" name ="topic3" class="form-control" id="ci" placeholder="e.g. Music">
+							</div>
+							</div>
+							<div class="form-group">
+							<label for="ci4" class="col-sm-2 control-label">Topic 4</label>
+							<div class="col-sm-10">
+							<input type="text" name ="topic4" class="form-control" id="ci" placeholder="e.g. Programming">
+							</div>
+							</div>
+							<div class="form-group">
+							<label for="ci5" class="col-sm-2 control-label">Topic 5</label>
+							<div class="col-sm-10">
+							<input type="text" name ="topic5" class="form-control" id="ci" placeholder="e.g. Google">
+							</div>
+							</div>
+
+							<br/>
+
+						</div>
+                    <div class="span12">
+                        <center><button type="submit">SUBMIT</button></center>
+                    </div>
+					</form>
                 </div>
             </div>
         </div>
@@ -97,9 +114,6 @@
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>
         <script type="text/javascript">
-            var bol = $("input[type=checkbox][name=chaines]:checked").length >= 5;
-               $("input[type=checkbox][name=chaines]").not(":checked").attr("disabled",bol);
-
            $("input[type=checkbox][name=chaines]").click(function() {
                var bol = $("input[type=checkbox][name=chaines]:checked").length >= 5;    
                $("input[type=checkbox][name=chaines]").not(":checked").attr("disabled",bol);
