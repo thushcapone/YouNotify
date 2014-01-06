@@ -35,7 +35,7 @@
                     <div class="links span8">
                         <a class="home" href="/" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
 			            <a class="what" href="/whatis" rel="tooltip" data-placement="bottom" data-original-title="What is YouNotify?"></a>
-                        <a class="contact" href="mailto:thushcapone@gmail.com" rel="tooltip" data-placement="bottom" data-original-title="Contact Us"></a>
+                        <a class="contact" href="mailto:thiependa.seye@esp.sn" rel="tooltip" data-placement="bottom" data-original-title="Contact Us"></a>
                     </div>
                 </div>
             </div>
@@ -50,23 +50,27 @@
                     {% if has_credentials == False %}
                     <form action="/register" method="get">
             			<h4>Do you want to receive a sms notification when a new video is uploaded in a Youtube Channel?</h4>
-                        <a href="https://plus.google.com/102873635075199110939" rel="publisher">Google+</a>
+                        <a href="https://plus.google.com/102873635075199110939" rel="publisher"></a>
             			<br/>
             			<br/>
                         <h2>REGISTER NOW TO <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span></h2>
 			             <button type="submit" href="/register">REGISTER</button>
                     </form>
+                    <form action="" method="get">
+                         <h2>Want to know how to use <strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> Check <a href="/whatis">What is</a> YouNotify</h2>
+                    </form>
 
         			<br/>
         			<br/>
                     {% else %}
-			         <h4>Hello {{ user}} Do you want to change your settings or revoke your registration in YouNotify?</h4>
-                    <form action="/youtube" method="get">
+			        <form action="/youtube" method="get">
+                    <h4>Hello {{ user}} Do you want to change your settings or unsubscribe from YouNotify?</h4>
+                    
 			             <button type="submit">Change your selections</button>
                     </form>
 
                     <form action="/revoke" method="get">
-			             <button type="submit">REVOKE</button>
+			             <button type="submit">Unsubscribe</button>
                     </form>
                     {% endif %}                
                 </div>
@@ -103,6 +107,5 @@
         }(document, 'script', 'facebook-jssdk'));
         </script>
     </body>
-<a href="https://plus.google.com/+Gcdc2013-younotifyAppspot" rel="publisher">Google+</a>
 </html>
 

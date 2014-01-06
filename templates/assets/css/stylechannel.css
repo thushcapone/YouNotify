@@ -246,3 +246,11 @@ div .left{
 #ci{
 	width: 100%;
 }
+
+h3 {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    /*background: url(../img/pencil.png) 70px 6px no-repeat;*/
+    border-bottom: 2px dotted #bbb;
+    text-align: center;
+}

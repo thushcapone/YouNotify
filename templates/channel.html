@@ -44,13 +44,13 @@
         <div class="register-container container">
             <div class="row main">
                 <div class="iphone span5 channel">
-                    <img src="assets/img/iphone2.png" alt="">
+                    <img src="assets/img/affiche.png" alt="">
                 </div>
 				<form action="/thanks" method="post">
 					<div class="left">
 						
 
-							<h2>Choose Channels that you want to <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> (limited to 5 please)</h2>
+							<h3>Choose the channels that you want to YouNotify (limited to 5 please)</h3>
 							{% for subscription in subscriptions %}
 								<label class="checkbox">
 									<img src="{{ subscription.snippet.thumbnails.default.url }}" name="image[]" width="88px" height:"88px" style="padding-right: 15px">
@@ -65,41 +65,61 @@
 					</div>
 					<div class="right">
 
-						<h2>With <span class="red"><strong><img src="assets/img/YouNotify.PNG" alt="YouNotify"/></strong></span> Be weekly informed by the trending video about the topic of your choice(s).</h2>
+						<h3>With YouNotify be weekly informed by the trending video about the topic of your choice(s).</h3>
+
 						<div class="form-group">
 							<label for="ci1" class="col-sm-2 control-label">Topic 1</label>
 							<div class="col-sm-10">
-							<input type="text" name ="topic1" class="form-control" id="ci" placeholder="e.g. Sports">
+                            {% if topic[0] %}
+							 <input type="text" name ="topic1" class="form-control" id="ci" value="{{topic[0]}}">
+                            {% else %}
+                                <input type="text" name ="topic1" class="form-control" id="ci" placeholder="e.g. Sports">
+                            {% endif %}
 							</div>
-							</div>
-							<div class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="ci2" class="col-sm-2 control-label">Topic 2</label>
 							<div class="col-sm-10">
-							<input type="text" name ="topic2" class="form-control" id="ci" placeholder="e.g. Beyonce">
+                            {% if topic[1] %}
+							     <input type="text" name ="topic2" class="form-control" id="ci" value="{{topic[1]}}">
+                            {% else %}
+                                <input type="text" name ="topic2" class="form-control" id="ci" placeholder="e.g. Youssou Ndour">
+                            {% endif %}
 							</div>
-							</div>
-							<div class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="ci3" class="col-sm-2 control-label">Topic 3</label>
 							<div class="col-sm-10">
-							<input type="text" name ="topic3" class="form-control" id="ci" placeholder="e.g. Music">
+                            {% if topic[2] %}
+							     <input type="text" name ="topic3" class="form-control" id="ci" value="{{topic[2]}}">
+                            {% else %}
+                                <input type="text" name ="topic3" class="form-control" id="ci" placeholder="e.g. Music">
+                            {% endif %}
 							</div>
-							</div>
-							<div class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="ci4" class="col-sm-2 control-label">Topic 4</label>
 							<div class="col-sm-10">
-							<input type="text" name ="topic4" class="form-control" id="ci" placeholder="e.g. Programming">
+                            {% if topic[3] %}
+							     <input type="text" name ="topic4" class="form-control" id="ci" value="{{topic[3]}}">
+                            {% else %}
+                                <input type="text" name ="topic4" class="form-control" id="ci" placeholder="e.g. Programming">
+                            {% endif %}
 							</div>
-							</div>
-							<div class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="ci5" class="col-sm-2 control-label">Topic 5</label>
 							<div class="col-sm-10">
-							<input type="text" name ="topic5" class="form-control" id="ci" placeholder="e.g. Google">
+                            {% if topic[4] %}
+							     <input type="text" name ="topic5" class="form-control" id="ci" value="{{topic[4]}}">
+                            {% else %}
+                                <input type="text" name ="topic5" class="form-control" id="ci" placeholder="e.g. Google">
+                            {% endif %}
 							</div>
-							</div>
+						</div>
 
 							<br/>
-
-						</div>
+					</div>
                     <div class="span12">
                         <center><button type="submit">SUBMIT</button></center>
                     </div>
